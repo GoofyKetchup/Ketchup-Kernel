@@ -6,9 +6,10 @@ start:
     mov eax, cr0
     or eax, 1
     mov cr0, eax
+    call CODE32:protected_mode_start
+    mov si, msg2
+    call print_string
 
-[BITS 32]
-    jmp CODE32:protected_mode_start
 
 protected_mode_start:
     mov ax, 0x10
@@ -17,13 +18,23 @@ protected_mode_start:
     mov fs, ax
     mov gs, ax
     mov ss, ax
+    ret
+[BITS 32]
+print_string:
+    lodsb
+.next_char:
+    cmp al, 0
+    je .done
 
-    mov ah, 0x02
-    mov al, 1
-    mov ch, 0
-    mov cl, 3
-    mov dh, 0
-    mov dl, 0x00
-    mov bx, 0x10000
-    int 0x13
-    jmp 0x10000
+    mov ah, 0x0E
+    int 0x0E
+    jmp .next_char
+.done:
+    mov ah, 0x0E
+    mov al, 0x0D
+    int 0x10
+    mov al, 0x0A
+    int 0x10
+    ret
+
+msg2 db "Protected Mode Enabled.",0
