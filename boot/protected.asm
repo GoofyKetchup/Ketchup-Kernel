@@ -6,20 +6,10 @@ start:
     mov eax, cr0
     or eax, 1
     mov cr0, eax
-    call CODE32:protected_mode_start
+    call protected_mode_start
     mov si, msg2
     call print_string
 
-
-protected_mode_start:
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
-    ret
-[BITS 32]
 print_string:
     lodsb
 .next_char:
@@ -37,4 +27,16 @@ print_string:
     int 0x10
     ret
 
+hang:
+    jmp hang
+
 msg2 db "Protected Mode Enabled.",0
+
+protected_mode_start:
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+    ret
