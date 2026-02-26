@@ -5,7 +5,8 @@ Open-Source 32-Bits DOS Kernel.
 
 ## \
 The root is where all the kernel is.
-everything is from root directory
+
+everything is from root directory.
 
 ## \Boot
 The boot directory contain every files for a correct boot of system
@@ -15,7 +16,8 @@ The Bootloader directory contain the bootloader.
 
 ### \Boot\Bootloader\bootloader.asm
 The bootloader is the first file to get run by the BIOS, despite his limited size of
-512 bytes, he execute 3 main function
+
+512 bytes, he execute 3 main function.
 
 - print_string : Print the message in si
 - load_gdt : Load a GDT
@@ -44,9 +46,13 @@ It currently do nothing.
 
 # Information
 CPU-Architectury : x86
+
 Mode : Protected Mode/32-Bits
+
 Firmware : BIOS
+
 Type : Disk Operating System
+
 
 # Contributor
 @GoofyKetchup
